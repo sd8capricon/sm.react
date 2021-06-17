@@ -4,13 +4,13 @@ import { useState, useEffect } from "react";
 export default function useUserStatus(token){
     const [verified, setVerified] = useState(null);
     const [err, setErr] = useState();
+    function handleStatus(status){
+        setVerified(status)
+    }
+    function handleErr(err){
+        setErr(err)
+    }
     useEffect(()=>{
-        function handleStatus(status){
-            setVerified(status)
-        }
-        function handleErr(err){
-            setErr(err)
-        }
         axios.post('http://localhost:5000/auth/verifyToken', {
             token: token
         }).then((res)=>{
