@@ -2,27 +2,21 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 export default function useUserStatus(token){
-    const [verified, setVerified] = useState(null);
-    const [err, setErr] = useState();
-    function handleStatus(status){
-        setVerified(status)
-    }
-    function handleErr(err){
-        setErr(err)
-    }
+    const [status, setStatus] = useState(null);
+    const [error, setError] = useState();
     useEffect(()=>{
         axios.post('http://localhost:5000/auth/verifyToken', {
             token: token
         }).then((res)=>{
             if(res.data.isAuthenticated){
-                handleStatus(res.data.isAuthenticated);
+                setStatus(res.data.isAuthenticated);
             }else{
-                handleStatus(res.data.isAuthenticated);
-                handleErr(res.data.err);
+                setStatus(res.data.isAuthenticated);
+                setError(res.data.err);
             }
         }).catch((err)=>{
-            handleErr(err);
+            setError(err);
         })
     },[token]);
-    return {verified,err};
+    return [status,error];
 }

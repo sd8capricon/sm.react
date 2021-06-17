@@ -6,28 +6,25 @@ import useUserStatus from '../hooks/useUserStatus';
 export default function Home(){
 
     //IMP fix component rerenders thrice
-
+    
     const socket = useContext(SocketContext);
     const token = localStorage.getItem('userToken');
-    const username = localStorage.getItem('username');
-    const {verified, err} = useUserStatus(token);
-    
-    const list = useFriendList(verified, err,username);
+    const username = localStorage.getItem('username');    
+    const [friends, getFriendError] = useFriendList(username);
+    const [verified, verificationError] = useUserStatus(token);
+    console.log(verified);
     if(verified){
         console.log("connected");
         socket.auth = { username };
         socket.connect();
     }
-    else if(err){
-        console.log(err);
-    }
-    console.log(list);
+    console.log(friends);
 
     return(
         <div>
             <h1>{verified? "hello" : "login first"}</h1>
             <ol>
-                {list.map((friend ,index)=>{return(<li key={index}>{friend.username}</li>);})}
+                {friends.map((friends ,index)=>{return(<li key={index}>{friends.username}</li>);})}
             </ol>
         </div>
     );

@@ -1,24 +1,19 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
 
-export default function useFriendList(authStaus, err, username){
-    const [friendList, setFriendList] = useState([]);
-    function handleFriendList(list){
-        setFriendList(list)
-    }
+export default function useFriendList(username){
+    const [friendList, setFriendList] = useState([]);    
+    const [error, setError] = useState();
+
     useEffect(()=>{
-        if(authStaus){
-            axios.post('http://localhost:5000/user/getfriends',{
-                    username: username
+        axios.post('http://localhost:5000/user/getfriends',{
+                username: username
+        })
+            .then((res)=>{
+                setFriendList(res.data.friends);
+            }).catch((err)=>{
+                setError(err);
             })
-                .then((res)=>{
-                    handleFriendList(res.data.friends);
-                }).catch((err)=>{
-                    console.log(err);
-                })
-        }else{
-            console.log(err);
-        }
-    },[authStaus, err, username]);
-    return friendList;
+    },[username]);
+    return [friendList, error];
 }
