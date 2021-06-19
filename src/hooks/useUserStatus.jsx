@@ -1,10 +1,11 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 
 export default function useUserStatus(token){
-    const [status, setStatus] = useState(null);
+    const [status, setStatus] = useState();
     const [error, setError] = useState();
-    useEffect(()=>{
+    useMemo(()=>{
+        console.log("Called stat")
         axios.post('http://localhost:5000/auth/verifyToken', {
             token: token
         }).then((res)=>{

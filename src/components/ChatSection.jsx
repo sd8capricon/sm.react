@@ -1,8 +1,11 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { SelectedFriendContext } from "../contexts/SelectedFriendContext";
 
-export default function ChatSection(){
+export default React.memo(function ChatSection(){
+
     const selectedUser = useContext(SelectedFriendContext);
+    
+    console.log('chat');
     if(selectedUser){
         return(
             <div>
@@ -17,4 +20,4 @@ export default function ChatSection(){
             </div>
         );
     }
-}
+})

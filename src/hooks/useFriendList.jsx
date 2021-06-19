@@ -11,7 +11,12 @@ export default function useFriendList(username){
                 username: username
         })
             .then((res)=>{
-                setFriendList(res.data.friends);
+                if(res.data.friends){
+                    setFriendList(res.data.friends);
+                }
+                else{
+                    setError(res.data.err);
+                }
             }).catch((err)=>{
                 setError(err);
             })

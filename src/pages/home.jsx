@@ -6,7 +6,6 @@ import { SelectedFriendContext } from '../contexts/SelectedFriendContext';
 import useFriendList from '../hooks/useFriendList';
 import useUserStatus from '../hooks/useUserStatus';
 //React Bootstrap
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 //Components
@@ -18,14 +17,18 @@ export default function Home(){
     const socket = useContext(SocketContext);
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('userToken');    
+    //calling hooks
     const [friends, getFriendError] = useFriendList(username);
     const [verified, verificationError] = useUserStatus(token);
+    //state
+    const [loading, setLoading] = useState(true)
     const [activeUsers, setActiveUsers] = useState([]);
     const [selectedFriend, setSelectedFriend] = useState();
-
+    
     useMemo(()=>{
         if(verified){            
             console.log("user now verified now connecting");
+            setLoading(false)
             socket.auth = { username };
             socket.connect();
         }
@@ -34,31 +37,50 @@ export default function Home(){
         }
     },[verified, socket, username])
 
-    socket.on("users", (users)=>{
-        users = users.filter(user => user.username!==username);
-        setActiveUsers(users)
-    });
-    socket.on("friend connected", (user)=>{
-        const newUserList = [...activeUsers, user];
-        setActiveUsers(newUserList)
-    });
-    socket.on("friend disconnected", (disconnect)=>{
-        const newUserList = activeUsers.filter(user => user.username!==disconnect.username);
-        setActiveUsers(newUserList)
-    });
+    //socket
+    useMemo(()=>{
+        socket.on("users", (users)=>{
+            users = users.filter(user => user.username!==username);
+            setActiveUsers(users)
+        });
+        socket.on("friend connected", (user)=>{
+            const newUserList = [...activeUsers, user];
+            setActiveUsers(newUserList)
+        });
+        socket.on("friend disconnected", (disconnect)=>{
+            const newUserList = activeUsers.filter(user => user.username!==disconnect.username);
+            setActiveUsers(newUserList)
+        });
+    },[activeUsers, socket, username])
+    
 
-    return(
-        <div>
-            <SelectedFriendContext.Provider value={selectedFriend}>
-                    <Row>
-                        <Col sm={4} md={4} lg={4}>
-                            <FriendList verified={verified} friends={friends} activeUsers={activeUsers} setSelectedUser={setSelectedFriend}/>
-                        </Col>
-                        <Col sm={8} md={8} lg={8}>
-                            <ChatSection/>
-                        </Col>
-                    </Row>
-            </SelectedFriendContext.Provider>
-        </div>
-    );
+    
+    if(verificationError || getFriendError){
+        return(
+            <div>"User Validation Error"</div>
+        );
+    }
+    else{
+        if(!loading){
+            if(verified){
+                return(
+                    <div>
+                        <SelectedFriendContext.Provider value={selectedFriend}>
+                                <Row>
+                                    <Col sm={4} md={4} lg={4}>
+                                        <FriendList friends={friends} activeUsers={activeUsers} setSelectedUser={setSelectedFriend}/>
+                                    </Col>
+                                    <Col sm={8} md={8} lg={8}>
+                                        <ChatSection/>
+                                    </Col>
+                                </Row>
+                        </SelectedFriendContext.Provider>
+                    </div>
+                );
+            }else{return(<></>)}
+        }
+        else{
+            return("loading")
+        }
+    }
 }
