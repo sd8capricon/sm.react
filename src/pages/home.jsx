@@ -1,12 +1,14 @@
 import { useContext, useMemo, useState } from 'react';
+//Contexts
 import { SocketContext } from '../contexts/SocketContext';
+import { SelectedFriendContext } from '../contexts/SelectedFriendContext';
+//Hooks
 import useFriendList from '../hooks/useFriendList';
 import useUserStatus from '../hooks/useUserStatus';
+//Components
 import FriendList from '../components/FriendList';
 
 export default function Home(){
-
-    //IMP fix component rerenders thrice
     
     const socket = useContext(SocketContext);
     const username = localStorage.getItem('username');
@@ -41,16 +43,10 @@ export default function Home(){
 
     return(
         <div>
-            {/* <h1>{verified? "hello" : "login first"}</h1>
-            <h2>Your Friends</h2>
-            {verified? <ol>
-                {friends.map((friends, index)=>{return(<li key={index}>{friends.username}</li>);})}
-            </ol>: <p></p>}
-            <h2>Your Online Friends</h2>
-            <ol>
-                {activeUsers.map((user, index)=>{return(<li key={index}>{user.username}</li>)})}
-            </ol> */}
-            <FriendList verified={verified} friends={friends} activeUsers={activeUsers}/>
+            <SelectedFriendContext.Provider value={"Sid"}>
+                
+                <FriendList verified={verified} friends={friends} activeUsers={activeUsers}/>
+            </SelectedFriendContext.Provider>
         </div>
     );
 }

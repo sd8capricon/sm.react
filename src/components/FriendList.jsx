@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { SelectedFriendContext } from "../contexts/SelectedFriendContext";
+
 export default function FriendList({ verified, friends, activeUsers }){
+    const SelectedFriend = useContext(SelectedFriendContext);
+    console.log(SelectedFriend);
     if(verified){
         return(
             <div>
