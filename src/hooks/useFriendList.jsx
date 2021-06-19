@@ -1,11 +1,12 @@
 import axios from 'axios';
-import { useEffect, useState } from "react";
+import { useState, useMemo } from "react";
 
 export default function useFriendList(username){
     const [friendList, setFriendList] = useState([]);    
     const [error, setError] = useState();
 
-    useEffect(()=>{
+    useMemo(()=>{
+        console.log('list hook called');
         axios.post('http://localhost:5000/user/getfriends',{
                 username: username
         })

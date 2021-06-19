@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useContext } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { SocketContext } from '../contexts/SocketContext';
 import useFriendList from '../hooks/useFriendList';
 import useUserStatus from '../hooks/useUserStatus';
@@ -14,11 +13,17 @@ export default function Home(){
     const [friends, getFriendError] = useFriendList(username);
     const [verified, verificationError] = useUserStatus(token);
     const [activeUsers, setActiveUsers] = useState([]);
-    if(verified){
-        console.log("connected");
-        socket.auth = { username };
-        socket.connect();
-    }
+
+    useMemo(()=>{
+        if(verified){            
+            console.log("user now verified now connecting");
+            socket.auth = { username };
+            socket.connect();
+        }
+        else{
+            console.log('user not yet verified');
+        }
+    },[verified, socket, username])
 
     socket.on("users", (users)=>{
         console.log(users.length);
