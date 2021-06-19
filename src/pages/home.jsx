@@ -26,9 +26,16 @@ export default function Home(){
     },[verified, socket, username])
 
     socket.on("users", (users)=>{
-        console.log(users.length);
         users = users.filter(user => user.username!==username);
         setActiveUsers(users)
+    });
+    socket.on("friend connected", (user)=>{
+        const newUserList = [...activeUsers, user];
+        setActiveUsers(newUserList)
+    });
+    socket.on("friend disconnected", (disconnect)=>{
+        const newUserList = activeUsers.filter(user => user.username!==disconnect.username);
+        setActiveUsers(newUserList)
     });
 
     return(
