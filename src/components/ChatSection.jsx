@@ -10,7 +10,7 @@ import Col from 'react-bootstrap/Col';
 export default React.memo(function ChatSection(){
 
     const selectedUser = useContext(SelectedFriendContext);
-    const user = selectedUser.selectedFriend
+    const user = selectedUser.selectedFriend;
 
     if(user){
         return(
