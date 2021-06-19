@@ -2,6 +2,7 @@ import { useContext, useMemo, useState } from 'react';
 import { SocketContext } from '../contexts/SocketContext';
 import useFriendList from '../hooks/useFriendList';
 import useUserStatus from '../hooks/useUserStatus';
+import FriendList from '../components/FriendList';
 
 export default function Home(){
 
@@ -40,7 +41,7 @@ export default function Home(){
 
     return(
         <div>
-            <h1>{verified? "hello" : "login first"}</h1>
+            {/* <h1>{verified? "hello" : "login first"}</h1>
             <h2>Your Friends</h2>
             {verified? <ol>
                 {friends.map((friends, index)=>{return(<li key={index}>{friends.username}</li>);})}
@@ -48,7 +49,8 @@ export default function Home(){
             <h2>Your Online Friends</h2>
             <ol>
                 {activeUsers.map((user, index)=>{return(<li key={index}>{user.username}</li>)})}
-            </ol>
+            </ol> */}
+            <FriendList verified={verified} friends={friends} activeUsers={activeUsers}/>
         </div>
     );
 }
