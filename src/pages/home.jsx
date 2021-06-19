@@ -24,6 +24,8 @@ export default function Home(){
     const [loading, setLoading] = useState(true)
     const [activeUsers, setActiveUsers] = useState([]);
     const [selectedFriend, setSelectedFriend] = useState();
+    const [selectedFriendId, setSelectedFriendId] = useState();
+    const friendData = {selectedFriend, selectedFriendId}
     
     useMemo(()=>{
         if(verified){            
@@ -41,6 +43,7 @@ export default function Home(){
     useMemo(()=>{
         socket.on("users", (users)=>{
             users = users.filter(user => user.username!==username);
+            console.log(users);
             setActiveUsers(users)
         });
         socket.on("friend connected", (user)=>{
@@ -64,10 +67,10 @@ export default function Home(){
         if(!loading){
                 return(
                     <div>
-                        <SelectedFriendContext.Provider value={selectedFriend}>
+                        <SelectedFriendContext.Provider value={friendData}>
                                 <Row>
                                     <Col sm={4} md={4} lg={4}>
-                                        <FriendList friends={friends} activeUsers={activeUsers} setSelectedUser={setSelectedFriend}/>
+                                        <FriendList friends={friends} activeUsers={activeUsers} setSelectedFriend={setSelectedFriend} setSelectedFriendId={setSelectedFriendId}/>
                                     </Col>
                                     <Col sm={8} md={8} lg={8}>
                                         <ChatSection/>
