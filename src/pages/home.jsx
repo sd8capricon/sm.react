@@ -62,7 +62,6 @@ export default function Home(){
     }
     else{
         if(!loading){
-            if(verified){
                 return(
                     <div>
                         <SelectedFriendContext.Provider value={selectedFriend}>
@@ -77,7 +76,6 @@ export default function Home(){
                         </SelectedFriendContext.Provider>
                     </div>
                 );
-            }else{return(<></>)}
         }
         else{
             return("loading")
