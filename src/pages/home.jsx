@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 //Components
 import FriendList from '../components/FriendList';
+import ChatSection from '../components/ChatSection';
 
 export default function Home(){
     
@@ -20,6 +21,7 @@ export default function Home(){
     const [friends, getFriendError] = useFriendList(username);
     const [verified, verificationError] = useUserStatus(token);
     const [activeUsers, setActiveUsers] = useState([]);
+    const [selectedFriend, setSelectedFriend] = useState();
 
     useMemo(()=>{
         if(verified){            
@@ -47,13 +49,13 @@ export default function Home(){
 
     return(
         <div>
-            <SelectedFriendContext.Provider value={"Sid"}>
+            <SelectedFriendContext.Provider value={selectedFriend}>
                     <Row>
-                        <Col md={4} lg={4}>
-                            <FriendList verified={verified} friends={friends} activeUsers={activeUsers}/>
+                        <Col sm={4} md={4} lg={4}>
+                            <FriendList verified={verified} friends={friends} activeUsers={activeUsers} setSelectedUser={setSelectedFriend}/>
                         </Col>
-                        <Col md={8} lg={8}>
-                            <div style={{backgroundColor: 'red'}}>color</div>
+                        <Col sm={8} md={8} lg={8}>
+                            <ChatSection/>
                         </Col>
                     </Row>
             </SelectedFriendContext.Provider>
