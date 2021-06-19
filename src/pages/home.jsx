@@ -5,6 +5,10 @@ import { SelectedFriendContext } from '../contexts/SelectedFriendContext';
 //Hooks
 import useFriendList from '../hooks/useFriendList';
 import useUserStatus from '../hooks/useUserStatus';
+//React Bootstrap
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 //Components
 import FriendList from '../components/FriendList';
 
@@ -44,8 +48,14 @@ export default function Home(){
     return(
         <div>
             <SelectedFriendContext.Provider value={"Sid"}>
-                
-                <FriendList verified={verified} friends={friends} activeUsers={activeUsers}/>
+                    <Row>
+                        <Col md={4} lg={4}>
+                            <FriendList verified={verified} friends={friends} activeUsers={activeUsers}/>
+                        </Col>
+                        <Col md={8} lg={8}>
+                            <div style={{backgroundColor: 'red'}}>color</div>
+                        </Col>
+                    </Row>
             </SelectedFriendContext.Provider>
         </div>
     );
