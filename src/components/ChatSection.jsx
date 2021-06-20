@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { SocketContext } from "../contexts/SocketContext";
 
-export default function ChatSection({from}){
+export default React.memo(function ChatSection({from}){
 
     const selectedUser = useContext(SelectedFriendContext);
     const socket = useContext(SocketContext);
@@ -22,13 +22,11 @@ export default function ChatSection({from}){
     }
 
     function sendMessage(){
-        console.log(friend+" "+friendId);
         socket.emit("private message", {content: content, id:friendId})
     }
 
     useEffect(()=>{
         socket.on("incoming private message", (dat)=>{
-            console.log(dat);
             setMessages([...messages, dat.content])
         })
     },[socket, messages])
@@ -56,4 +54,4 @@ export default function ChatSection({from}){
             </div>
         );
     }
-}
+})

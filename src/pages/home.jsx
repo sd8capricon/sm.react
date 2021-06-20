@@ -43,11 +43,9 @@ export default function Home(){
     useMemo(()=>{
         socket.on("users", (users)=>{
             users = users.filter(user => user.username!==username);
-            console.log(users);
             setActiveUsers(users)
         });
         socket.on("friend connected", (user)=>{
-            console.log(user);
             const newUserList = [...activeUsers, user];
             setActiveUsers(newUserList)
             if(user.username === selectedFriend){
