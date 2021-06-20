@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useMemo, useCallback, useEffect } from "react";
 import { SelectedFriendContext } from "../contexts/SelectedFriendContext";
 //React Bootstrap
 import Button from 'react-bootstrap/Button';
@@ -20,14 +20,21 @@ export default React.memo(function ChatSection({from}){
         setContent(e.target.value)
     }
 
+    // const sendMessage = useCallback(()=>{
+    //         console.log(friendId);
+    //         socket.emit("private message", {content: content, id:friendId})
+    // }, [content, friendId, socket])
+
     function sendMessage(){
         console.log(friendId);
         socket.emit("private message", {content: content, id:friendId})
     }
 
-    socket.on("incoming private message", (dat)=>{
-        console.log(dat);
-    })
+    useEffect(()=>{
+        socket.on("incoming private message", (dat)=>{
+            console.log(dat);
+        })
+    },[socket])
 
     if(friend){
         return(
