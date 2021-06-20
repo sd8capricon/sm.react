@@ -1,8 +1,9 @@
 import React from "react";
 
-export default React.memo(function FriendList({ friends, activeUsers, setSelectedFriend, setSelectedFriendId }){
+export default function FriendList({ friends, activeUsers, setSelectedFriend, setSelectedFriendId }){
     console.log('friend');
     function handleSelection(e){
+        console.log('friend id '+e.target.value)
         setSelectedFriend(e.target.innerText); //alt e.target.name
         setSelectedFriendId(e.target.value)
     }
@@ -23,4 +24,4 @@ export default React.memo(function FriendList({ friends, activeUsers, setSelecte
                 }
             </div>
         );
-})
+}

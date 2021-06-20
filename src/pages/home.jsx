@@ -47,14 +47,18 @@ export default function Home(){
             setActiveUsers(users)
         });
         socket.on("friend connected", (user)=>{
+            console.log(user);
             const newUserList = [...activeUsers, user];
             setActiveUsers(newUserList)
+            if(user.username === selectedFriend){
+                setSelectedFriendId(user.userId)
+            }
         });
         socket.on("friend disconnected", (disconnect)=>{
             const newUserList = activeUsers.filter(user => user.username!==disconnect.username);
             setActiveUsers(newUserList)
         });
-    },[activeUsers, socket, username])
+    },[activeUsers, socket, username, selectedFriend])
     
 
     
