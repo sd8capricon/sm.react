@@ -16,6 +16,7 @@ export default React.memo(function ChatSection({from}){
     const friendId = selectedUser.selectedFriendId;
     const [content, setContent] = useState('');
     const [messages, setMessages] = useState([]);
+    const [userMessages, setUserMessage] = useState([]);
 
     function handleContent(e){
         setContent(e.target.value)
@@ -23,11 +24,17 @@ export default React.memo(function ChatSection({from}){
 
     function sendMessage(){
         socket.emit("private message", {content: content, id:friendId})
+        setContent('')
+        const myMessage = {
+            content: content,
+            fromUsername: "You"
+        }
+        setMessages([...messages, myMessage])
     }
 
     useEffect(()=>{
         socket.on("incoming private message", (dat)=>{
-            setMessages([...messages, dat.content])
+            setMessages([...messages, dat])
         })
     },[socket, messages])
 
@@ -37,7 +44,7 @@ export default React.memo(function ChatSection({from}){
                 <h3>{friend}</h3>
                 <div style={{padding: 25}}>
                     <Row>
-                        <ul>{messages.map((message, index)=>{return(<li key={index}>{message}</li>)})}</ul>
+                        <ul className="ul-scroll">{messages.map((message, index)=>{return(<li key={index}><h5>{message.fromUsername}</h5>{message.content}</li>)})}</ul>
                     </Row>
                     <Row>
                         <Col><Form.Control value={content} onChange={handleContent}/></Col>

@@ -72,7 +72,7 @@ export default function Home(){
                         <SelectedFriendContext.Provider value={friendData}>
                                 <Row>
                                     <Col sm={4} md={4} lg={4}>
-                                        <FriendList friends={friends} activeUsers={activeUsers} setSelectedFriend={setSelectedFriend} setSelectedFriendId={setSelectedFriendId}/>
+                                        <FriendList self={username} friends={friends} activeUsers={activeUsers} setSelectedFriend={setSelectedFriend} setSelectedFriendId={setSelectedFriendId}/>
                                     </Col>
                                     <Col sm={8} md={8} lg={8}>
                                         <ChatSection/>
