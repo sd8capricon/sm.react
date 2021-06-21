@@ -1,0 +1,49 @@
+/* Parent */
+.test{
+    overflow: hidden;
+}
+
+/* FriendList */
+.friendList{
+    background-color: #202020;
+    color: white;
+    padding: 0% 0%;
+    height: 100vh;
+    border-right:1px solid rgb(151, 151, 151);
+}
+.friend-user{
+    background-color: #333333;
+    padding: 2%;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+/* ChatSection */
+.chat{
+    background-color: #333333;
+    margin: 0;
+    padding: auto;
+    height: 100%;
+}
+.chat-friend{
+    background-color: #333333;
+    padding: 1%;
+    color: white;
+}
+.chat-messages-window{
+    background-color: #121212;
+    color: white;
+    height: 80.5vh;
+    margin: 0%;
+    width: 100%;
+    overflow: auto;
+}
+.chat-input-form{
+    display: inline-flex;
+    margin: 2vh auto;
+}
+.chat-input{
+    width: 50vw;
+    margin-right: 2vw;
+}

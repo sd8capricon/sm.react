@@ -1,14 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { SelectedFriendContext } from "../contexts/SelectedFriendContext";
+import { SocketContext } from "../contexts/SocketContext";
 //React Bootstrap
 import Button from 'react-bootstrap/Button';
 // import InputGroup from 'react-bootstrap/InputGroup'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { SocketContext } from "../contexts/SocketContext";
 
-export default React.memo(function ChatSection({from}){
+export default React.memo(function ChatSection(){
 
     const selectedUser = useContext(SelectedFriendContext);
     const socket = useContext(SocketContext);
@@ -16,13 +15,13 @@ export default React.memo(function ChatSection({from}){
     const friendId = selectedUser.selectedFriendId;
     const [content, setContent] = useState('');
     const [messages, setMessages] = useState([]);
-    const [userMessages, setUserMessage] = useState([]);
 
     function handleContent(e){
         setContent(e.target.value)
     }
 
-    function sendMessage(){
+    function sendMessage(e){
+        e.preventDefault();
         socket.emit("private message", {content: content, id:friendId})
         setContent('')
         const myMessage = {
@@ -41,14 +40,18 @@ export default React.memo(function ChatSection({from}){
     if(friend){
         return(
             <div>
-                <h3>{friend}</h3>
-                <div style={{padding: 25}}>
+                <h3 className="chat-friend">{friend}</h3>
+                <div>
                     <Row>
-                        <ul className="ul-scroll">{messages.map((message, index)=>{return(<li key={index}><h5>{message.fromUsername}</h5>{message.content}</li>)})}</ul>
+                        <div className="chat-messages-window">
+                            <ul>{messages.map((message, index)=>{return(<li key={index}><h5>{message.fromUsername}</h5>{message.content}</li>)})}</ul>
+                        </div>
                     </Row>
-                    <Row>
-                        <Col><Form.Control value={content} onChange={handleContent}/></Col>
-                        <Col><Button onClick={sendMessage}>Send</Button></Col>
+                    <Row className="chat-input-window">
+                        <Form className="chat-input-form" onSubmit={sendMessage}>
+                            <Form.Control className="chat-input" value={content} onChange={handleContent} placeholder="Enter Your Message Here"/>
+                            <Button className="chat-input-button">Send</Button>
+                        </Form>
                     </Row>
                 </div>
             </div>
@@ -57,7 +60,7 @@ export default React.memo(function ChatSection({from}){
     else{
         return(
             <div>
-                <h3>Select An User</h3>
+                <h3 className="chat-friend">Select An User</h3>
             </div>
         );
     }

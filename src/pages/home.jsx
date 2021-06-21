@@ -11,6 +11,7 @@ import Col from 'react-bootstrap/Col';
 //Components
 import FriendList from '../components/FriendList';
 import ChatSection from '../components/ChatSection';
+import { Container } from 'react-bootstrap';
 
 export default function Home(){
     
@@ -68,18 +69,18 @@ export default function Home(){
     else{
         if(!loading){
                 return(
-                    <div>
-                        <SelectedFriendContext.Provider value={friendData}>
-                                <Row>
-                                    <Col sm={4} md={4} lg={4}>
-                                        <FriendList self={username} friends={friends} activeUsers={activeUsers} setSelectedFriend={setSelectedFriend} setSelectedFriendId={setSelectedFriendId}/>
-                                    </Col>
-                                    <Col sm={8} md={8} lg={8}>
-                                        <ChatSection/>
-                                    </Col>
-                                </Row>
-                        </SelectedFriendContext.Provider>
-                    </div>
+                    <SelectedFriendContext.Provider value={friendData}>
+                        <Container fluid>
+                            <Row>
+                                <Col className="friendList" sm={3} md={3} lg={3}>
+                                    <FriendList self={username} friends={friends} activeUsers={activeUsers} setSelectedFriend={setSelectedFriend} setSelectedFriendId={setSelectedFriendId}/>
+                                </Col>
+                                <Col className="chat" sm={9} md={9} lg={9}>
+                                    <ChatSection/>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </SelectedFriendContext.Provider>
                 );
         }
         else{
