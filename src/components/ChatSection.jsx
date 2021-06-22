@@ -42,8 +42,8 @@ export default React.memo(function ChatSection(){
             <div>
                 <h3 className="chat-friend">{friend}</h3>
                 <div>
-                    <Row>
-                        <div className="chat-messages-window">
+                    <Row className="chat-messages-window">
+                        <div className="chat-messages-sub-window">
                             <ul>{messages.map((message, index)=>{return(<li key={index}><h5>{message.fromUsername}</h5>{message.content}</li>)})}</ul>
                         </div>
                     </Row>

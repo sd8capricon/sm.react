@@ -47,9 +47,10 @@
 }
 .chat-messages-window{
     background-color: #121212;
-    color: white;
-    height: 80.5vh;
-    margin: 0%;
+    height: 81vh;
+}
+.chat-messages-sub-window{
+    height: 100%;
     width: 100%;
     overflow: auto;
 }
