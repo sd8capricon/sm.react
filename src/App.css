@@ -1,8 +1,3 @@
-/* Parent */
-.test{
-    overflow: hidden;
-}
-
 /* FriendList */
 .friendList{
     background-color: #202020;
@@ -12,22 +7,41 @@
     border-right:1px solid rgb(151, 151, 151);
 }
 .friend-user{
-    background-color: #333333;
+    background-color: #373737;
     padding: 2%;
     width: 100%;
     text-align: center;
     color: white;
 }
+.friend-stat{
+    padding: 2% 0%;
+}
+.friend-user-button{
+    border: 0;
+    padding: 4% 3%;
+    width: 100%;
+    text-align: left;
+    background-color: inherit;
+    color: inherit;
+}
+.friend-user-list{
+    list-style-type: none;
+    border-top:1px solid rgb(88, 88, 88);
+    /* border-bottom:1px solid rgb(88, 88, 88); */
+}
+.active-button:hover{
+    background-color: #313131;
+}
 
 /* ChatSection */
 .chat{
-    background-color: #333333;
+    background-color: #373737;
     margin: 0;
     padding: auto;
     height: 100%;
 }
 .chat-friend{
-    background-color: #333333;
+    background-color: #373737;
     padding: 1%;
     color: white;
 }

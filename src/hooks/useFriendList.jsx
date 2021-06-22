@@ -6,10 +6,7 @@ export default function useFriendList(username){
     const [error, setError] = useState();
 
     useMemo(()=>{
-        console.log('list hook called');
-        axios.post('http://localhost:5000/user/getfriends',{
-                username: username
-        })
+        axios.get('http://localhost:5000/user/getfriends/'+username)
             .then((res)=>{
                 if(res.data.friends){
                     setFriendList(res.data.friends);
