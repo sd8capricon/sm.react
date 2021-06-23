@@ -5,7 +5,7 @@ import './App.css';
 
 //Pages
 import Home from "./pages/home";
-import LogIn from "./pages/login";
+import Login from "./pages/LoginPage";
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path='/' component={Home}/>
-          <Route exact path='/login' component={LogIn}/>
+          <Route exact path='/login' component={Login}/>
         </Switch>
       </Router>
     </SocketContext.Provider>
