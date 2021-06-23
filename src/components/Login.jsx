@@ -47,7 +47,7 @@ export default function Login(){
             <Form.Control type="text" value={username} onChange={handleUsername}/><br/>
             <Form.Label>Password</Form.Label><br/>
             <Form.Control type="password" autoComplete="on"value={password} onChange={handlePassword}/><br/>
-            <Button type="submit">Log In</Button><Link to="/" style={{color:"white", marginLeft:"21%"}}>New Here? Register Here</Link><br/><br />
+            <Button type="submit">Log In</Button><Link to="/" style={{color:"white", marginLeft:"21%"}}>New User? Register Here</Link><br/><br />
             {isError?<label>{err}</label>: <label> </label>}
         </Form>
     );

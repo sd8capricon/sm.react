@@ -65,7 +65,7 @@ export default function Home(){
     if(verificationError || getFriendError){
         return(
             <div>
-                {/* <h1>You are not Logged In</h1> */}
+                <h1 style={{textAlign:"center", margin:"1%"}}>Secured Messenger</h1>
                 <Login/>
             </div>
         );
