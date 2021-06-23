@@ -7,11 +7,12 @@ import useFriendList from '../hooks/useFriendList';
 import useUserStatus from '../hooks/useUserStatus';
 //React Bootstrap
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
+import Col from 'react-bootstrap/Col';import { Container } from 'react-bootstrap';
 //Components
 import FriendList from '../components/FriendList';
 import ChatSection from '../components/ChatSection';
-import { Container } from 'react-bootstrap';
+import Login from '../components/Login';
+
 
 export default function Home(){
     
@@ -63,7 +64,11 @@ export default function Home(){
     
     if(verificationError || getFriendError){
         return(
-            <div>"User Validation Error"</div>
+            <div>
+                <h1>User Validation Error</h1>
+                <h2>Please Try Logging in again</h2>
+                <Login/>
+            </div>
         );
     }
     else{

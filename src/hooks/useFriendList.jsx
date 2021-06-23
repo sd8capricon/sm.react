@@ -6,7 +6,8 @@ export default function useFriendList(username){
     const [error, setError] = useState();
 
     useMemo(()=>{
-        axios.get('http://localhost:5000/user/getfriends/'+username)
+        if(username!==null && username!==undefined){
+            axios.get('http://localhost:5000/user/getfriends/'+username)
             .then((res)=>{
                 if(res.data.friends){
                     setFriendList(res.data.friends);
@@ -17,6 +18,9 @@ export default function useFriendList(username){
             }).catch((err)=>{
                 setError(err);
             })
+        }else{
+            setError("No user")
+        }
     },[username]);
     return [friendList, error];
 }
