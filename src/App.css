@@ -1,3 +1,12 @@
+/* Login Form */
+.Login-Form{
+    background-color: #494949;
+    border-radius: 5%;
+    padding: 5vw 3vw;
+    margin: 6.25vw auto;
+    width: 30vw;
+}
+
 /* FriendList */
 .friendList{
     background-color: #202020;

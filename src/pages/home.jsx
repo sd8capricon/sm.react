@@ -65,8 +65,7 @@ export default function Home(){
     if(verificationError || getFriendError){
         return(
             <div>
-                <h1>User Validation Error</h1>
-                <h2>Please Try Logging in again</h2>
+                {/* <h1>You are not Logged In</h1> */}
                 <Login/>
             </div>
         );

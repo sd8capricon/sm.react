@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { Form, Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 
 export default function Login(){
@@ -40,15 +41,14 @@ export default function Login(){
         });;
     }
     return(
-        <div>
-            <Form className="adminForm adminLoginForm" onSubmit={handleSubmit}>
-                <Form.Label>Username</Form.Label><br/>
-                <Form.Control type="text" value={username} onChange={handleUsername}/><br/>
-                <Form.Label>Password</Form.Label><br/>
-                <Form.Control type="password" autoComplete="on"value={password} onChange={handlePassword}/><br/>
-                <Button type="submit">Log In</Button><br/>
-                {isError?<label style={{color:"red"}}>{err}</label>: <label></label>}
-            </Form>
-        </div>
+        <Form className="Login-Form" onSubmit={handleSubmit}>
+            <h2>Login</h2><br/>
+            <Form.Label>Username</Form.Label><br/>
+            <Form.Control type="text" value={username} onChange={handleUsername}/><br/>
+            <Form.Label>Password</Form.Label><br/>
+            <Form.Control type="password" autoComplete="on"value={password} onChange={handlePassword}/><br/>
+            <Button type="submit">Log In</Button><Link to="/" style={{color:"white", marginLeft:"21%"}}>New Here? Register Here</Link><br/><br />
+            {isError?<label>{err}</label>: <label> </label>}
+        </Form>
     );
 }
