@@ -1,3 +1,9 @@
+button{
+    border: 0;
+    background-color: inherit;
+    color: inherit;
+}
+
 /* Login Form */
 .Login-Form{
     background-color: #494949;
@@ -23,15 +29,13 @@
     color: white;
 }
 .friend-stat{
-    padding: 2% 0%;
+    padding: 2% 1%;
 }
+
 .friend-user-button{
-    border: 0;
     padding: 4% 3%;
     width: 100%;
     text-align: left;
-    background-color: inherit;
-    color: inherit;
 }
 .friend-user-list{
     list-style-type: none;

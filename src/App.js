@@ -6,6 +6,7 @@ import './App.css';
 //Pages
 import Home from "./pages/home";
 import Login from "./pages/LoginPage";
+import FriendsPage from "./pages/FriendsPage";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Switch>
           <Route exact path='/' component={Home}/>
           <Route exact path='/login' component={Login}/>
+          <Route exact path='/friends' component={FriendsPage}/>
         </Switch>
       </Router>
     </SocketContext.Provider>
