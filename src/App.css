@@ -4,6 +4,10 @@ button{
     color: inherit;
 }
 
+.input{
+    border-radius: 4rem;
+}
+
 /* Login Form */
 .Login-Form{
     background-color: #494949;

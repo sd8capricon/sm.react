@@ -49,7 +49,7 @@ export default React.memo(function ChatSection(){
                     </Row>
                     <Row className="chat-input-window">
                         <Form className="chat-input-form" onSubmit={sendMessage}>
-                            <Form.Control className="chat-input" value={content} onChange={handleContent} placeholder="Enter Your Message Here"/>
+                            <Form.Control className="input chat-input" value={content} onChange={handleContent} placeholder="Enter Your Message Here"/>
                             <Button className="chat-input-button" onClick={sendMessage}>Send</Button>
                         </Form>
                     </Row>

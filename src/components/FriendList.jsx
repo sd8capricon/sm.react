@@ -1,5 +1,8 @@
 import React from "react";
+//react-router
 import { Link } from "react-router-dom";
+//componets
+import Friends from "./Friends";
 
 export default React.memo(function FriendList({ self, friends, activeUsers, setSelectedFriend, setSelectedFriendId }){
     function handleSelection(e){
@@ -9,15 +12,9 @@ export default React.memo(function FriendList({ self, friends, activeUsers, setS
     return(
         <div>
             <h1 className="friend-user">Hello {self}</h1>
-            <h2 className="friend-stat">Your Friends &nbsp;&nbsp;<Link to="/friends" style={{color:"inherit"}}><i class="bi bi-person-plus-fill"/></Link></h2>
-            {friends.map((friends, index)=>{
-                    return(
-                        <li className="friend-user-list friend-user-button" key={index}>
-                            {friends.username}
-                        </li>
-                    )
-                }
-            )}
+            <h2 className="friend-stat">Your Friends &nbsp;&nbsp;<Link to="/friends" style={{color:"inherit"}}><i className="bi bi-person-plus-fill"/></Link></h2>
+            <Friends className="friend-user-list friend-user-button" friends={friends}/>
+            
             <h2 className="friend-stat">Your Online Friends</h2>
             {activeUsers.map((user, index)=>{
                     const id=user.userId;

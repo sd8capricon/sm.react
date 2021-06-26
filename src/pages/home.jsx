@@ -5,13 +5,14 @@ import { SelectedFriendContext } from '../contexts/SelectedFriendContext';
 //Hooks
 import useFriendList from '../hooks/useFriendList';
 import useUserStatus from '../hooks/useUserStatus';
-//React Bootstrap
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';import { Container } from 'react-bootstrap';
 //Components
 import FriendList from '../components/FriendList';
 import ChatSection from '../components/ChatSection';
 import Login from '../components/Login';
+//React Bootstrap
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { Container } from 'react-bootstrap';
 
 
 export default function Home(){
