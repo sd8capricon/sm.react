@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
+import axios from "axios";
 //Custom Hooks
 import useFriendList from "../hooks/useFriendList";
 import useUserStatus from "../hooks/useUserStatus";
@@ -6,8 +7,7 @@ import useUserStatus from "../hooks/useUserStatus";
 import Login from "../components/Login";
 import Friends from "../components/Friends";
 //react bootstrap
-import { Form } from "react-bootstrap";
-import { useMemo } from "react";
+import { Button, Form } from "react-bootstrap";
 
 export default function FriendsPage(){
     const username = localStorage.getItem('username');
@@ -16,15 +16,27 @@ export default function FriendsPage(){
     const [friends, getFriendError] = useFriendList(username);
     const [verified, verificationError] = useUserStatus(token);
     //state
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(true);
+    let [toUser, setToUser] = useState('');
 
     useMemo(()=>{
         if (verified){
             setLoading(false)
-        }else{
+        }else if(!verified){
             console.log("User Not yet verified")
         }
     },[verified])
+
+    function sendReq(e){
+        e.preventDefault();
+        axios.post('http://localhost:5000/user/sendRequest', { from: username, to:  toUser})
+            .then((res)=>{
+                if(res.data.error){
+                    console.log(res.data.error);
+                }
+            }).catch(err=>console.log(err))
+        setToUser('')
+    }
 
     if(verificationError || getFriendError){
         return(
@@ -39,8 +51,9 @@ export default function FriendsPage(){
             return(
                 <div>
                     <h1>Friends Page</h1>
-                    <Form>
-                        <Form.Control className="input"/>
+                    <Form onSubmit={sendReq}>
+                        <Form.Control className="input" value={toUser} onChange={e=>setToUser(e.target.value)}/>
+                        <Button type='submit'>Submit</Button>
                     </Form>
                     <h2>Your Friends</h2>
                     <Friends className="" friends={friends}/>                    
