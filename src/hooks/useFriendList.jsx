@@ -2,7 +2,8 @@ import axios from 'axios';
 import { useState, useMemo } from "react";
 
 export default function useFriendList(username){
-    const [friendList, setFriendList] = useState([]);    
+    const [friendList, setFriendList] = useState([]);
+    const [pendingReq, setPendingReq] = useState([]);    
     const [error, setError] = useState();
 
     useMemo(()=>{
@@ -11,6 +12,7 @@ export default function useFriendList(username){
             .then((res)=>{
                 if(res.data.friends){
                     setFriendList(res.data.friends);
+                    setPendingReq(res.data.friendRequests);
                 }
                 else{
                     setError(res.data.err);
@@ -22,5 +24,5 @@ export default function useFriendList(username){
             setError("No user")
         }
     },[username]);
-    return [friendList, error];
+    return [friendList, pendingReq, error];
 }

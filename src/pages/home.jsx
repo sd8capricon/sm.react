@@ -21,7 +21,7 @@ export default function Home(){
     const username = localStorage.getItem('username');
     const token = localStorage.getItem('userToken');    
     //calling hooks
-    const [friends, getFriendError] = useFriendList(username);
+    const [friends, pendingReq, getFriendError] = useFriendList(username);
     const [verified, verificationError] = useUserStatus(token);
     //state
     const [loading, setLoading] = useState(true)
